@@ -42,7 +42,7 @@
           
           for (let item of json) {
             if (item.type === 'dir' && (/^\d{8}_\d+Z$/).test(item.name)) {
-              html += `<li><a href="${item.path}">${item.name}</a></li>`;
+              html += `<li><a href="${item.path}">${ormatTimestamp(item.name)}</a></li>`;
             }
           }
   
@@ -54,6 +54,19 @@
         }
       })()
     });
+
+    function formatTimestamp(timestamp) {
+      const [datePart, timePart] = timestamp.split('_');
+      const year = datePart.slice(0, 4);
+      const month = datePart.slice(4, 6);
+      const day = datePart.slice(6, 8);
+      const hours = timePart.slice(0, 2);
+      const minutes = timePart.slice(2, 4);
+      const seconds = timePart.slice(4, 6);
+
+      const date = new Date(Date.UTC(year, month - 1, day, hours, minutes, seconds));
+      return date.toLocaleString('en-US', { timeZone: 'UTC', dateStyle: 'medium', timeStyle: 'long' });
+    }
     </script>
   </head>
   <body>
