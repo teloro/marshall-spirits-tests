@@ -41,7 +41,7 @@
           let html = '<ul>';
           
           for (let item of json) {
-            if (item.type === 'dir') {
+            if (item.type === 'dir' && (/^\d{8}_\d+Z$/).test(item.name)) {
               html += `<li><a href="${item.path}">${item.name}</a></li>`;
             }
           }
