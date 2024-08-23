@@ -26,7 +26,7 @@
     <script>
       document.addEventListener('DOMContentLoaded', () => {
       (async () => {
-        const response = await fetch({
+        const res = await fetch({
           method: 'GET',
           url: 'https://api.github.com/repos/teloro/marshall-spirits-tests/contents/',
           headers: {
@@ -34,7 +34,11 @@
             'X-GitHub-Api-Version': '2022-11-28',
           },
         });
-        const data = await response.json();
+        if (!res.ok) {
+            console.error('Failed to fetch data:', response.status, response.statusText);
+            return;
+          }
+        const data = await res.json();
         let html = '<ul>';
         
         for (let item of data) {
