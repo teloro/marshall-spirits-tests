@@ -31,18 +31,16 @@
             method: 'GET',
             url: 'https://api.github.com/repos/teloro/marshall-spirits-tests/contents/',
             headers: {
-              'Content-Type': 'application/json',
               'X-GitHub-Api-Version': '2022-11-28',
             },
           });
           if (!res.ok) {
-            console.error('Failed to fetch data:', response.status, response.statusText);
-            return;
+            throw new Error(`Response status: ${response.status}`);
           }
-          const data = await res.json();
+          const json = await res.json();
           let html = '<ul>';
           
-          for (let item of data) {
+          for (let item of json) {
             if (item.type === 'dir') {
               html += `<li><a href="${item.path}">${item.name}</a></li>`;
             }
@@ -52,7 +50,7 @@
           document.getElementById('reports-list').innerHTML = html;
 
         } catch (e) {
-          console.error(e);
+          console.error(e.message);
         }
       })()
     });
