@@ -1,0 +1,56 @@
+<html>
+  <head>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+        margin: 0;
+        padding: 20px;
+      }
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+      li {
+        border-bottom: 1px solid #ccc;
+        padding: 12px;
+      }
+      a {
+        color: #333;
+        text-decoration: none;
+      }
+      a:hover {
+        color: #000;
+      }
+    </style>
+    <script>
+      (async () => {
+        const response = await fetch({
+          method: 'GET',
+          url: 'https://api.github.com/repos/teloro/marshall-spirits-tests/contents/',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-GitHub-Api-Version': '2022-11-28',
+          },
+        });
+        const data = await response.json();
+        let html = '<ul>';
+        
+        for (let item of data) {
+          if (item.type === 'dir') {
+            html += `<li><a href="${item.path}">${item.name}</a></li>`;
+          }
+        }
+
+        html += '</ul>';
+        document.getElementById('reports-list').innerHTML = html;
+      })()
+    </script>
+  </head>
+  <body>
+    <h1>E2E Test Reports</h1>
+    <div id="reports-list">
+      <p class="loading">Loading...</p>
+    </div>
+  <body>
+</html>
