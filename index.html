@@ -27,7 +27,7 @@
       document.addEventListener('DOMContentLoaded', () => {
       (async () => {
         try {
-          const res = await fetch('https://api.github.com/repos/teloro/marshall-spirits-tests/contents', {
+          const res = await fetch('https://api.github.com/repos/teloro/marshall-spirits-tests/contents?ref=gh-pages', {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
