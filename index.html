@@ -24,6 +24,7 @@
       }
     </style>
     <script>
+      document.addEventListener('DOMContentLoaded', () => {
       (async () => {
         const response = await fetch({
           method: 'GET',
@@ -45,6 +46,7 @@
         html += '</ul>';
         document.getElementById('reports-list').innerHTML = html;
       })()
+    });
     </script>
   </head>
   <body>
