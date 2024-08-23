@@ -27,10 +27,10 @@
       document.addEventListener('DOMContentLoaded', () => {
       (async () => {
         try {
-          const res = await fetch({
+          const res = await fetch('https://api.github.com/repos/teloro/marshall-spirits-tests/contents', {
             method: 'GET',
-            url: 'https://api.github.com/repos/teloro/marshall-spirits-tests/contents/',
             headers: {
+              'Content-Type': 'application/json',
               'X-GitHub-Api-Version': '2022-11-28',
             },
           });
