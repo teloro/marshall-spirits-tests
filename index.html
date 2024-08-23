@@ -42,7 +42,7 @@
           
           for (let item of json) {
             if (item.type === 'dir' && (/^\d{8}_\d+Z$/).test(item.name)) {
-              html += `<li><a href="${item.path}">${ormatTimestamp(item.name)}</a></li>`;
+              html += `<li><a href="${item.path}">${formatTimestamp(item.name)}</a></li>`;
             }
           }
   
