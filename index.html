@@ -37,16 +37,21 @@
           if (!res.ok) {
             throw new Error(`Response status: ${res.status}`);
           }
-          const json = await res.json();
-          let html = '<ul>';
-          
-          for (let item of json) {
-            if (item.type === 'dir' && (/^\d{8}_\d+Z$/).test(item.name)) {
-              html += `<li><a href="${item.path}">${formatTimestamp(item.name)}</a></li>`;
+          const items = await res.json();
+          let html = '';
+          if (Array.isArray(items) && items.length > 0) {
+            html += '<ul>';
+            
+            for (let item of items) {
+              if (item.type === 'dir' && (/^\d{8}_\d+Z$/).test(item.name)) {
+                html += `<li><a href="${item.path}">${formatTimestamp(item.name)}</a></li>`;
+              }
             }
+    
+            html += '</ul>';
+          } else {
+            html += '<p>No reports found</p>';
           }
-  
-          html += '</ul>';
           document.getElementById('reports-list').innerHTML = html;
 
         } catch (e) {
