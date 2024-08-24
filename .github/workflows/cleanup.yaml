@@ -23,7 +23,7 @@ jobs:
           python-version: 3.9
 
       - name: Delete old folders
-        run: python ./scripts/delete-old-folders.py --n-days 14 --folder-name playwright-report
+        run: python ./scripts/delete-old-folders.py --n-days 14 --folder-name .
 
       - name: Commit all changed files back to the repository
         uses: stefanzweifel/git-auto-commit-action@v5
